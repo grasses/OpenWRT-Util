@@ -46,6 +46,31 @@ def getDiskSpace():
         if i==2:
             return(line.split()[1:5])
 
+def getSystem():
+    p = os.popen("uname -amnrspv")
+    while 1:
+        line = p.readline()
+        return(line)
+
+def getExtranetIp():
+    p = os.popen('wget "http://www.ip138.com/ips1388.asp" -q -O - | sed -nr \'s/.*\[(([0-9]+\.){3}[0-9]+)\].*/\1/p\'')
+    while 1:
+        line = p.readline()
+        print line
+        return(line)
+
+def getIntranetIp():
+    p = os.popen('ifconfig apcli0 | grep inet\ addr')
+    while 1:
+        line = p.readline()
+        return(line)
+
+def getSsid():
+    p = os.popen('uci get wireless.@wifi-iface[0].ApCliSsid')
+    while 1:
+        line = p.readline()
+        return(line)
+
 # CPU informatiom
 CPU_temp = getCPUtemperature()
 CPU_usage = getCPUuse()
@@ -63,15 +88,27 @@ DISK_total = DISK_stats[0]
 DISK_used = DISK_stats[1]
 DISK_perc = DISK_stats[3]
 
+# system info
+SYSTEM_info = getSystem()
+
+# NET infomation
+NET_extranet_ip = getExtranetIp()
+NET_internet_ip = getIntranetIp().lstrip('')
+NET_connect_ssid = getSsid()
+
 if __name__ == '__main__':
-    print('')
-    print('CPU Temperature = '+CPU_temp)
-    print('CPU Use = '+CPU_usage)
-    print('')
+    print('-------------------------------------------')
+    print("System info ="+str(SYSTEM_info))
+    print('-------------------------------------------')
     print('RAM Total = '+str(RAM_total)+' MB')
     print('RAM Used = '+str(RAM_used)+' MB')
     print('RAM Free = '+str(RAM_free)+' MB')
-    print('') 
+    print('-------------------------------------------')
     print('DISK Total Space = '+str(DISK_total)+'B')
     print('DISK Used Space = '+str(DISK_used)+'B')
     print('DISK Used Percentage = '+str(DISK_perc))
+    print('-------------------------------------------')
+    print('NET Extranet Ip ='+str(NET_extranet_ip))
+    print('NET Connect Ssid ='+str(NET_connect_ssid))
+    print('NET Internet Wan Ip ='+str(NET_internet_ip))
+    
