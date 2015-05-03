@@ -9,7 +9,7 @@ Copyright 2015 http://homeway.me
 
 ]]--
 
-x=require("gpio")
+x=require("lib.gpio")
 print("Please input io id =>")
 id = io.read("*num")
 x.mode(id, "out")

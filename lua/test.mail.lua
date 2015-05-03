@@ -10,7 +10,7 @@ Copyright 2015 http://homeway.me
 
 ]]--
 
-local mail = require("email")
+local mail = require("lib.email")
 
 local data = {}
 data.user = {["from"]="sender@gmail.com", ["to"]="receiver@gmail.com", ["password"]="password"}

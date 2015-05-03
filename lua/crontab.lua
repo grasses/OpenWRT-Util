@@ -79,7 +79,7 @@ os.execute("/root/script/sysinfo.py > "..M.sysPath)
 M.msg = M.readFile(M.sysPath)
 
 local data = {}
-data.user = {["from"]="homeway@jue.so", ["to"]="626184755@qq.com", ["password"]="0814891WLT"}
+data.user = {["from"]="", ["to"]="", ["password"]=""}
 data.mail = {["subject"]="系统当前信息", ["body"]=M.data}
 data.sys = {["server"]="smtp.qq.com"}
 
